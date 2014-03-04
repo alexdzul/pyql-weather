@@ -58,7 +58,7 @@ La información que puedes obtener de esta librería es:
 ### Clase Weather
 + WOEID requerido para construir el objeto.
 
-[class Weather]()
+>> class Weather
 Objeto que almacena los datos del clima y tiempo de un WOEID dado. Esta información es obtenida de los
 servicios de Yahoo.
 
@@ -127,7 +127,7 @@ Methods defined here:
 ### Clase GeoData
 + Latitud y Longitud requerido para construir el objeto
 
-[class GeoData]()
+>>class GeoData
   Objeto que almacena los datos geoespaciales de una latitude y longitude dada. Éstos datos son obtenidos
   mediante la consulta de los servicios de Yahoo vía YQL
 
@@ -153,6 +153,7 @@ Methods defined here:
 + get_woeid(self)
      Devuelve el Where on Earth Identifier
 
+--------------------------------------------------------------------------------------
 
 Autor:
 -------------------------------------------------------------
