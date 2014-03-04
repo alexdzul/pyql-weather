@@ -1,23 +1,20 @@
-[pyql-weather]
+pyql-weather / Yahoo Weather para python
 =================
-
-Yahoo Weather para python
-------------------------------------------------------------
 
 Instalación:
 ------------------------------------------------------------
 
-1. Descarga el paquete y ejecutar:
+(1) Descarga el paquete y ejecutar:
 
 ```bash
 python setup.py install
 ```
 
-2. A disfrutar de las consultas del clima en Yahoo!!!!
+(2) A disfrutar de las consultas del clima en Yahoo!!!!
 
 
 
-Author:
+Autor:
 -----------------------------------------------------------
 [Alex Dzul] ( http://alexdzul.com)
 
