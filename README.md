@@ -6,13 +6,11 @@ pyql-weather
 Instalación:
 ------------------------------------------------------------
 
-+ Descarga el paquete y ejecutar:
+1. Descarga el paquete y ejecutar:
 
 ```bash
 python setup.py install
 ```
-
-+ A disfrutar de las consultas del clima en Yahoo!!!!
 
 
 ### Ejemplo de uso: (1)
