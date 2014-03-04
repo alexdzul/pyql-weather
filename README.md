@@ -58,9 +58,9 @@ La información que puedes obtener de esta librería es:
 ### Clase Weather
 + WOEID requerido para construir el objeto.
 
->> class Weather
-Objeto que almacena los datos del clima y tiempo de un WOEID dado. Esta información es obtenida de los
-servicios de Yahoo.
+* class Weather
+>Objeto que almacena los datos del clima y tiempo de un WOEID dado. Esta información es obtenida de los
+>servicios de Yahoo.
 
 Methods defined here:
 
