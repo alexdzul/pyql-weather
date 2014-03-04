@@ -13,10 +13,10 @@ python setup.py install
 (2) A disfrutar de las consultas del clima en Yahoo!!!!
 
 
-####### Ejemplo de uso: (1) ##########
+### Ejemplo de uso: (1)
 
 ```python
-from pyql.weather.models import weather
+from pyql.weather.models import Weather
 
 # Pasamos en WOEID:
 w = Weather(24553062)
@@ -25,10 +25,10 @@ print "Temperatura: %sc. Estatus: (%s) %s"%(w.get_temperature(), w.get_status_co
 
 ```
 
-####### Ejemplo de uso: (2) ##########
+### Ejemplo de uso: (2)
 
 ```python
-from pyql.weather.models import weather, GeoData
+from pyql.weather.models import Weather, GeoData
 
 # Obtenemos datos de una latitud y longitud dada:
 geo = GeoData(latitude, longitude) # Inicializamos el objeto
