@@ -1,6 +1,6 @@
 from pyql.weather.models import GeoData, Weather
 
-lat = 21.143185
+lat = "21.143185"
 long = "-88.151035"
 
 
@@ -17,8 +17,6 @@ def main(lat,long):
     print "================================="
     w = Weather(geo.get_woeid())
     print "Temperatura: %sc. Estatus: (%s) %s"%(w.get_temperature(), w.get_status_code(), w.get_status_text())
-
-
 
 
 main(lat,long)

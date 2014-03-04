@@ -11,7 +11,7 @@ yahoo_url = "http://query.yahooapis.com/v1/public/yql?q="
 
 
 
-def get_geo_data(latitude,longitude):
+def get_geo_data(latitude, longitude):
     """
     Función que se utiliza para la obtención de datos geográficos de una latitude y longitude recibida.
     El resultado es un objeto tipo JSON
