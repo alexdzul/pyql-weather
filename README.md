@@ -1,4 +1,4 @@
-pyql-weather
+pyql-weather v.0.1
 =================
 ### Yahoo Weather para Python
 
