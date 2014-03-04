@@ -1,11 +1,11 @@
 from pyql.weather.models import GeoData, Weather
 
-lat = "21.143185"
-long = "-88.151035"
+lat = "20.982994"
+long = "-89.617710"
 
 
 
-def main(lat,long):
+def main(lat, long):
     print "================================="
     print "obteniendo datos geoespaciales (%s, %s) ...." %(lat, long)
     print "================================="
