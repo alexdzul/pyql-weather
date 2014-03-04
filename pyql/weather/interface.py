@@ -4,7 +4,7 @@ Archivo: interface.py
 Módulo que se utiliza para las consultas YQL a Yahoo para obtener información de sus servidores.
 """
 __author__ = 'Alex Dzul'
-import simplejson
+import json
 import urllib2
 yahoo_url = "http://query.yahooapis.com/v1/public/yql?q="
 
@@ -18,7 +18,7 @@ def get_geo_data(latitude, longitude):
     """
     query = "select * from geo.placefinder where text=\"%s,%s\" and gflags=\"R\"" % (latitude, longitude)
     url = yql_to_url(query)
-    obj = simplejson.load(urllib2.urlopen(url))
+    obj = json.load(urllib2.urlopen(url))
     return obj
 
 
@@ -32,7 +32,7 @@ def get_weather_data(woeid, unit_temp="c"):
     if unit_temp == "f":
         query = "select * from weather.forecast where woeid=%s AND u=\"%s\""%(woeid, unit_temp)
     url = yql_to_url(query)
-    obj = simplejson.load(urllib2.urlopen(url))
+    obj = json.load(urllib2.urlopen(url))
     return obj
 
 
