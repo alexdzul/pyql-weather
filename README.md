@@ -45,12 +45,13 @@ para obtener el WOEID que desconocemos y posteriormente ya podremos consultar el
 
 
 
-####### Autor: ##########
+Autor:
+-------------------------------------------------------------
 
 [Alex Dzul] ( http://alexdzul.com)
 
 
-####### Nota: ##########
+### Nota:
 
 La versión de este paquete aún se encuentra en alfa por lo que
 se recomienda no utilizar en entornos de producción hasta la liberación
