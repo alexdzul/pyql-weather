@@ -6,6 +6,7 @@ En este archivo se encuentran los modelos (Objetos) que almacenan la informació
 __author__ = 'Alex Dzul'
 from interface import get_geo_data, get_weather_data
 
+
 class GeoData:
     """
     Objeto que almacena los datos geoespaciales de una latitude y longitude dada. Éstos datos son obtenidos

@@ -21,6 +21,7 @@ def get_geo_data(latitude,longitude):
     obj = simplejson.load(urllib2.urlopen(url))
     return obj
 
+
 def get_weather_data(woeid, unit_temp="c"):
     """
     Función que se utiliza para obtener información del tiempo y Clima de un WOEID recibido.
@@ -33,6 +34,7 @@ def get_weather_data(woeid, unit_temp="c"):
     url = yql_to_url(query)
     obj = simplejson.load(urllib2.urlopen(url))
     return obj
+
 
 def yql_to_url(query, format="json"):
     """
