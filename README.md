@@ -56,9 +56,8 @@ La información que puedes obtener de esta librería es:
 ----------------------------------------------------------------------------------------------------
 
 ### Clase Weather
-+ WOEID requerido para construir el objeto.
+"WOEID requerido para construir el objeto."
 
-(class Weather)
 >Objeto que almacena los datos del clima y tiempo de un WOEID dado. Esta información es obtenida de los
 >servicios de Yahoo.
 
@@ -125,9 +124,8 @@ Methods defined here:
 --------------------------------------------------------------------------------------
 
 ### Clase GeoData
-+ Latitud y Longitud requerido para construir el objeto
+"Latitud y Longitud requerido para construir el objeto"
 
-+ class GeoData
   >Objeto que almacena los datos geoespaciales de una latitude y longitude dada. Éstos datos son obtenidos
   >mediante la consulta de los servicios de Yahoo vía YQL
 
@@ -160,9 +158,9 @@ Autor:
 Alex Dzul.
 Python / Django Sr. Developer.
 
-Página web: [alexdzul.com] (http://alexdzul.com)
-Canal de Youtube: [youtube.com/alexexc2] (http://youtube.com/alexexc2)
-Twitter: [@lexjs88] (http://twitter.com/alexjs88)
+[1] Página web: [alexdzul.com] (http://alexdzul.com)
+[2] Canal de Youtube: [youtube.com/alexexc2] (http://youtube.com/alexexc2)
+[3] Twitter: [@lexjs88] (http://twitter.com/alexjs88)
 
 
 ### Nota:
