@@ -158,7 +158,7 @@ Python / Django Sr. Developer.
 
 [1] Página web: [alexdzul.com] (http://alexdzul.com)
 [2] Canal de Youtube: [youtube.com/alexexc2] (http://youtube.com/alexexc2)
-[3] Twitter: [@lexjs88] (http://twitter.com/alexjs88)
+[3] Twitter: [@alexjs88] (http://twitter.com/alexjs88)
 
 
 ### Nota:
