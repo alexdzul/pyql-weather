@@ -16,7 +16,7 @@ setup(name='pyql-weather',
       author=author,
       author_email=author_email,
       url='http://www.github.com/alexdzul/pyql-weather/',
-      packages=['pyql','pyql.weather'],
+      packages=['pyql', 'pyql.weather', 'pyql.geo'],
       classifiers=[
             "Development Status :: 2 - Pre-Alpha",
             "Environment :: Console",
@@ -25,7 +25,6 @@ setup(name='pyql-weather',
             "Natural Language :: English",
             "Operating System :: OS Independent",
             "Programming Language :: Python :: 2.7",
-            "Programming Language :: Python :: 3",
             "Topic :: Software Development",
             "Topic :: Software Development :: Libraries :: Python Modules"
             ]
