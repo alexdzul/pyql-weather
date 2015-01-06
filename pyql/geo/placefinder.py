@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'alex'
+__author__ = 'Alex Dzul'
 from pyql.interface import YQLConector
 
 
@@ -11,7 +11,6 @@ class PlaceFinder():
     def __init__(self):
         self.__Result = None
         self.__count = None
-        self.__as_json = None
         self.__as_xml = None
 
     def as_json(self):
