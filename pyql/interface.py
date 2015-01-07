@@ -8,7 +8,7 @@ import json
 import urllib2
 
 from pyql.settings import YAHOO_URL
-
+from pyql.errors import YQLRequestError
 
 class YQLConector():
 
@@ -61,11 +61,3 @@ def query_weather_forecast(woeid, unit_temp="c"):
     obj = json.load(urllib2.urlopen(url))
     return obj
 """
-
-
-class InvalidYQLQueryError(Exception):
-    pass
-
-
-class YQLRequestError(Exception):
-    pass
