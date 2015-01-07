@@ -49,15 +49,17 @@ class YQLConector():
         url = "{0}{1}&format={2}&callback=".format(YAHOO_URL, query, format_response)
         return url
 
-"""
-def query_weather_forecast(woeid, unit_temp="c"):
-    Función que se utiliza para obtener información del tiempo y Clima de un WOEID recibido.
-    El resultado es un objeto tipo JSON.
-    if unit_temp == "c":
-        query = "select * from weather.forecast where woeid=%s AND u=\"%s\""%(woeid, unit_temp)
-    if unit_temp == "f":
-        query = "select * from weather.forecast where woeid=%s AND u=\"%s\""%(woeid, unit_temp)
-    url = yql_to_url(query)
-    obj = json.load(urllib2.urlopen(url))
-    return obj
-"""
+    @staticmethod
+    def make_query(query_base, **kwargs):
+        new_query = query_base
+        if kwargs:
+            last = len(kwargs) - 1
+            i_flag = 0
+            new_query += ' where '
+            for key, value in kwargs.items():
+                if i_flag is last:  # Si es el último entonces no ponemos el "and"
+                    new_query += '{0}="{1}"'.format(key, value)
+                else:
+                    new_query += '{0}="{1}" and '.format(key, value)
+                    i_flag += 1
+        return new_query
