@@ -11,6 +11,12 @@ Esta versión número 2 tiene mayor soporte a las consultas YQL.
 
 + geo.placefinder
 + geo.continents
++ geo.counties
++ geo.countries
++ geo.seas
++ geo.states
++ geo.oceans
++ geo.districs
 + weather.forecast
 
 
