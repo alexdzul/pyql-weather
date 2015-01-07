@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-__author__ = 'alex'
+__author__ = 'Alex Dzul'
+from pyql.errors import MultipleValueError
 from pyql.interface import YQLConector
 
 
@@ -11,8 +12,6 @@ class PlaceFinder():
     def __init__(self):
         self.__Result = None
         self.__count = None
-        self.__as_json = None
-        self.__as_xml = None
 
     def as_json(self):
         """
@@ -21,7 +20,7 @@ class PlaceFinder():
         return self.__Result
 
     @staticmethod
-    def get(value, field="text"):
+    def get(**kwargs):
         """
         Realizamos una consulta a la base de datos de Yahoo para obtener información de geo.placefinder.
         Nota:
@@ -30,41 +29,50 @@ class PlaceFinder():
 
         Para obtener más de 1 resultado entonces utilizar la función filter().
         """
-        response = query_placefinder(value, field)
-        if response:
-            my_count = response["query"]["count"]
-            my_response = response["query"]["results"]["Result"]
-            place = PlaceFinder()
-            place.__count = my_count
-            if type(my_response) is dict:  # Si es solo un elemento entonces enviamos de manera directa
-                place.__Result = my_response
-            if type(my_response) is list:
-                place.__Result = my_response[0]  # Si es una lista entonces enviamos solo el primer elemento
-            return place
+        response = query_placefinder(**kwargs)
+        my_count = response["query"]["count"]
+        if my_count > 0:
+            if response:
+                my_count = response["query"]["count"]
+                my_response = response["query"]["results"]["Result"]
+                if type(my_response) is dict:  # Si es solo un elemento entonces enviamos de manera directa
+                    place = PlaceFinder()
+                    place.__count = my_count
+                    place.__Result = my_response
+                    return place
+                if type(my_response) is list:
+                    msg = 'get function returns more than 1 value, please use "filter"'
+                    raise MultipleValueError(msg)
+        else:
+            return None
 
     @staticmethod
-    def filter(value, field="text"):
+    def filter(**kwargs):
         """
         Realiza una consulta a la base de datos de Yahoo utilizando YQL.
         El valor retornado siempre será una lista de objetos tipo "PlaceFinder"
         """
-        response = query_placefinder(value, field)
-        if response:
-            my_count = response["query"]["count"]
-            list_result = []
-            my_response = response["query"]["results"]["Result"]
-            if type(my_response) is list:
-                for data in response:
+        response = query_placefinder(**kwargs)
+        my_count = response["query"]["count"]
+        if my_count > 0:
+            if response:
+                my_count = response["query"]["count"]
+                list_result = []
+                my_response = response["query"]["results"]["Result"]
+                if type(my_response) is list:
+                    for data in response:
+                        place = PlaceFinder()
+                        place.__Result = data
+                        place.__count = my_count
+                        list_result.append(place)
+                if type(my_response) is dict:
                     place = PlaceFinder()
-                    place.__Result = data
+                    place.__Result = my_response
                     place.__count = my_count
                     list_result.append(place)
-            if type(my_response) is dict:
-                place = PlaceFinder()
-                place.__Result = my_response
-                place.__count = my_count
-                list_result.append(place)
-            return list_result
+                return list_result
+        else:
+            return None
 
     def count(self):
         """
@@ -283,8 +291,11 @@ class PlaceFinder():
             return None
 
 
-def query_placefinder(value, field="text"):
-    query = 'select * from geo.placefinder where {0}="{1}" and gflags="R"'.format(field, value)
-    yql_conector = YQLConector()
-    data = yql_conector.request(query)
+def query_placefinder(**kwargs):
+    # query_base = 'select * from geo.placefinder where {0}="{1}" and gflags="R"'.format(field, value)
+    query_base = 'select * from geo.placefinder'
+    full_query = YQLConector.make_query(query_base, **kwargs)
+    full_query += ' and gflags="R"'  # Se agrega esta entrada especial
+    yql_connector = YQLConector()
+    data = yql_connector.request(full_query)
     return data

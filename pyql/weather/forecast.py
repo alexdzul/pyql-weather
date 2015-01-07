@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'alexdzul'
+__author__ = 'Alex Dzul'
 from pyql.interface import YQLConector
 
 
@@ -15,21 +15,53 @@ class Forecast:
         self.__as_json = None
         self.__as_xml = None
         self.__item = _Item()
+        self.__location = _Location()
+        self.__units = _Units()
+        self.__wind = _Wind()
+        self.__atmosphere = _Atmosphere()
+        self.__astronomy = _Astronomy()
+        self.__image = _Image()
 
     @staticmethod
-    def get(value, units="c"):
+    def get(**kwargs):
         """
         Constructor del objeto Weather, se alimenta inicialmente de un WOEID para obtener información del clima.
         Posteriomente se puede consultar más información del clima utilizando las funciones que contiene.
         """
-        response = query_forecast(value, units)
-        if response:
-            my_count = response["query"]["count"]
-            channel = response["query"]["results"]["channel"]
-            forecast = Forecast()
-            forecast._Result = channel
-            forecast.__item._Result = channel["item"]
-            return forecast
+        response = query_forecast(**kwargs)
+        my_count = response["query"]["count"]
+        if my_count:
+            if response:
+                my_count = response["query"]["count"]
+                channel = response["query"]["results"]["channel"]
+                forecast = Forecast()
+                forecast.__count = my_count
+                forecast.__Result = channel
+                forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
+                forecast.__location._Result = channel["location"]  # Llenamos el objeto tipo location
+                forecast.__units._Result = channel["units"]  # Llenamos el objeto tipo location
+                forecast.__wind._Result = channel["wind"]  # Llenamos el objeto tipo location
+                forecast.__atmosphere._Result = channel["atmosphere"]  # Llenamos el objeto tipo atmosphere
+                forecast.__astronomy._Result = channel["astronomy"]  # Llenamos el objeto tipo astronomy
+                forecast.__image._Result = channel["image"]  # Llenamos el objeto tipo image
+                condition = _Condition()  # Creamos un elemento del tipo Condition
+                condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
+                forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
+                return forecast
+        else:
+            return None
+
+    def count(self):
+        """
+        Retorna el número de elementos devueltos
+        """
+        return self.__count
+
+    def as_json(self):
+        """
+        Devuelve la información en Json
+        """
+        return self.__Result
 
     @property
     def title(self):
@@ -61,7 +93,7 @@ class Forecast:
             return None
 
     @property
-    def lastBuildDate(self):
+    def last_build_date(self):
         try:
             return self.__Result["lastBuildDate"]
         except KeyError:
@@ -76,76 +108,250 @@ class Forecast:
 
     @property
     def location(self):
-        try:
-            return self.__Result["location"]
-        except KeyError:
-            return None
+        return self.__location
 
     @property
     def units(self):
-        try:
-            return self.__Result["units"]
-        except KeyError:
-            return None
+        return self.__units
 
 
     @property
     def wind(self):
-        try:
-            return self.__Result["wind"]
-        except KeyError:
-            return None
+        return self.__wind
 
     @property
     def atmosphere(self):
-        try:
-            return self.__Result["atmosphere"]
-        except KeyError:
-            return None
+        return self.__atmosphere
 
     @property
     def astronomy(self):
-        try:
-            return self.__Result["astronomy"]
-        except KeyError:
-            return None
+        return self.__astronomy
 
     @property
     def image(self):
-        try:
-            return self.__Result["image"]
-        except KeyError:
-            return None
+        return self.__image
 
     @property
     def item(self):
         return self.__item
 
+
+
+class _Units():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en JSON
+        """
+        return self._Result
+
     @property
-    def item_title(self):
+    def distance(self):
         try:
-            return self.__Result["item"]["title"]
+            return self._Result["distance"]
         except KeyError:
             return None
 
     @property
-    def item_lat(self):
+    def pressure(self):
         try:
-            return self.__Result["item"]["lat"]
+            return self._Result["pressure"]
         except KeyError:
             return None
 
     @property
-    def item_long(self):
+    def speed(self):
         try:
-            return self.__Result["item"]["long"]
+            return self._Result["speed"]
         except KeyError:
             return None
 
     @property
-    def item_lat(self):
+    def temperature(self):
         try:
-            return self.__Result["item"]["lat"]
+            return self._Result["temperature"]
+        except KeyError:
+            return None
+
+
+class _Wind():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en JSON
+        """
+        return self._Result
+
+    @property
+    def chill(self):
+        try:
+            return self._Result["chill"]
+        except KeyError:
+            return None
+
+    @property
+    def direction(self):
+        try:
+            return self._Result["direction"]
+        except KeyError:
+            return None
+
+    @property
+    def speed(self):
+        try:
+            return self._Result["speed"]
+        except KeyError:
+            return None
+
+
+class _Atmosphere():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en JSON
+        """
+        return self._Result
+
+    @property
+    def humidity(self):
+        try:
+            return self._Result["humidity"]
+        except KeyError:
+            return None
+
+    @property
+    def pressure(self):
+        try:
+            return self._Result["pressure"]
+        except KeyError:
+            return None
+
+    @property
+    def rising(self):
+        try:
+            return self._Result["rising"]
+        except KeyError:
+            return None
+
+    @property
+    def visibility(self):
+        try:
+            return self._Result["visibility"]
+        except KeyError:
+            return None
+
+
+class _Astronomy():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en JSON
+        """
+        return self._Result
+
+    @property
+    def sunrise(self):
+        try:
+            return self._Result["sunrise"]
+        except KeyError:
+            return None
+
+    @property
+    def sunset(self):
+        try:
+            return self._Result["sunset"]
+        except KeyError:
+            return None
+
+
+class _Image():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en JSON
+        """
+        return self._Result
+
+    @property
+    def title(self):
+        try:
+            return self._Result["title"]
+        except KeyError:
+            return None
+
+    @property
+    def width(self):
+        try:
+            return self._Result["width"]
+        except KeyError:
+            return None
+
+    @property
+    def height(self):
+        try:
+            return self._Result["height"]
+        except KeyError:
+            return None
+
+    @property
+    def link(self):
+        try:
+            return self._Result["link"]
+        except KeyError:
+            return None
+
+    @property
+    def url(self):
+        try:
+            return self._Result["url"]
+        except KeyError:
+            return None
+
+
+class _Location():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en JSON
+        """
+        return self._Result
+
+    @property
+    def city(self):
+        try:
+            return self._Result["city"]
+        except KeyError:
+            return None
+
+    @property
+    def region(self):
+        try:
+            return self._Result["region"]
+        except KeyError:
+            return None
+
+    @property
+    def country(self):
+        try:
+            return self._Result["country"]
         except KeyError:
             return None
 
@@ -154,7 +360,13 @@ class _Item():
 
     def __init__(self):
         self._Result = None
+        self._condition = _Condition()
 
+    def as_json(self):
+        """
+        Devuelve la información en Json
+        """
+        return self._Result
     @property
     def title(self):
         try:
@@ -199,24 +411,82 @@ class _Item():
 
     @property
     def condition(self):
-        try:
-            return self._Result["condition"]
-        except KeyError:
-            return None
+        return self._condition
 
     @property
     def forecast(self):
+        """
+        Esta propiedad envía información en formato JSON del pronóstico de los siguientes 5 días.
+        Los valores que podemos obtener son:
+        1. code
+        2. text
+        3. high
+        4. low
+        5. date
+        6. day
+
+        Se puede acceder a ellos de la siguiente manera:
+
+        forecast = Forecast.get(woeid)
+        for day in forecast.item.forecast:
+            print(day["code"])
+            print(day["text])
+            print(day["high])
+            .....
+        """
         try:
             return self._Result["forecast"]
         except KeyError:
             return None
 
 
-def query_forecast(value, units="c"):
+class _Condition():
+
+    def __init__(self):
+        self._Result = None
+
+    def as_json(self):
+        """
+        Devuelve la información en Json
+        """
+        return self._Result
+
+    @property
+    def date(self):
+        try:
+            return self._Result["date"]
+        except KeyError:
+            return None
+
+    @property
+    def text(self):
+        try:
+            return self._Result["text"]
+        except KeyError:
+            return None
+
+    @property
+    def code(self):
+        try:
+            return self._Result["code"]
+        except KeyError:
+            return None
+
+
+    @property
+    def temp(self):
+        try:
+            return self._Result["temp"]
+        except KeyError:
+            return None
+
+
+def query_forecast(**kwargs):
     """
     Construye la query YQL y realiza la solicitud de datos a la tabla weather.forecast
     """
-    query = 'select * from weather.forecast where woeid={0} AND u="{1}"'.format(value, units)
-    yql_conector = YQLConector()
-    data = yql_conector.request(query)
+    query_base = 'select * from weather.forecast'
+    full_query = YQLConector.make_query(query_base, **kwargs)
+    yql_connector = YQLConector()
+    data = yql_connector.request(full_query)
     return data

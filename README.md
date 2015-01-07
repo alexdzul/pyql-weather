@@ -10,6 +10,7 @@ Esta versión número 2 tiene mayor soporte a las consultas YQL.
 > Se tiene disponible el acceso a las tablas:
 
 + geo.placefinder
++ geo.continents
 + weather.forecast
 
 

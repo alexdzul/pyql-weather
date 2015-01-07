@@ -17,15 +17,14 @@ setup(name='pyql-weather',
       author_email=author_email,
       url='http://www.github.com/alexdzul/pyql-weather/',
       packages=['pyql', 'pyql.weather', 'pyql.geo'],
-      classifiers=[
-            "Development Status :: 2 - Pre-Alpha",
-            "Environment :: Console",
-            "Intended Audience :: Developers",
-            "License :: OSI Approved :: MIT License",
-            "Natural Language :: English",
-            "Operating System :: OS Independent",
-            "Programming Language :: Python :: 2.7",
-            "Topic :: Software Development",
-            "Topic :: Software Development :: Libraries :: Python Modules"
-            ]
-     )
+      classifiers=["Development Status :: 2 - Pre-Alpha",
+                   "Environment :: Console",
+                   "Intended Audience :: Developers",
+                   "License :: OSI Approved :: MIT License",
+                   "Natural Language :: English",
+                   "Operating System :: OS Independent",
+                   "Programming Language :: Python :: 2.7",
+                   "Topic :: Software Development",
+                   "Topic :: Software Development :: Libraries :: Python Modules",
+                   ]
+      )
