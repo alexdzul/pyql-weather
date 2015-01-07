@@ -23,29 +23,33 @@ class Forecast:
         self.__image = _Image()
 
     @staticmethod
-    def get(value, units="c"):
+    def get(**kwargs):
         """
         Constructor del objeto Weather, se alimenta inicialmente de un WOEID para obtener información del clima.
         Posteriomente se puede consultar más información del clima utilizando las funciones que contiene.
         """
-        response = query_forecast(value, units)
-        if response:
-            my_count = response["query"]["count"]
-            channel = response["query"]["results"]["channel"]
-            forecast = Forecast()
-            forecast.__count = my_count
-            forecast.__Result = channel
-            forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
-            forecast.__location._Result = channel["location"]  # Llenamos el objeto tipo location
-            forecast.__units._Result = channel["units"]  # Llenamos el objeto tipo location
-            forecast.__wind._Result = channel["wind"]  # Llenamos el objeto tipo location
-            forecast.__atmosphere._Result = channel["atmosphere"]  # Llenamos el objeto tipo atmosphere
-            forecast.__astronomy._Result = channel["astronomy"]  # Llenamos el objeto tipo astronomy
-            forecast.__image._Result = channel["image"]  # Llenamos el objeto tipo image
-            condition = _Condition()  # Creamos un elemento del tipo Condition
-            condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
-            forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
-            return forecast
+        response = query_forecast(**kwargs)
+        my_count = response["query"]["count"]
+        if my_count:
+            if response:
+                my_count = response["query"]["count"]
+                channel = response["query"]["results"]["channel"]
+                forecast = Forecast()
+                forecast.__count = my_count
+                forecast.__Result = channel
+                forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
+                forecast.__location._Result = channel["location"]  # Llenamos el objeto tipo location
+                forecast.__units._Result = channel["units"]  # Llenamos el objeto tipo location
+                forecast.__wind._Result = channel["wind"]  # Llenamos el objeto tipo location
+                forecast.__atmosphere._Result = channel["atmosphere"]  # Llenamos el objeto tipo atmosphere
+                forecast.__astronomy._Result = channel["astronomy"]  # Llenamos el objeto tipo astronomy
+                forecast.__image._Result = channel["image"]  # Llenamos el objeto tipo image
+                condition = _Condition()  # Creamos un elemento del tipo Condition
+                condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
+                forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
+                return forecast
+        else:
+            return None
 
     def count(self):
         """
@@ -477,11 +481,12 @@ class _Condition():
             return None
 
 
-def query_forecast(value, units="c"):
+def query_forecast(**kwargs):
     """
     Construye la query YQL y realiza la solicitud de datos a la tabla weather.forecast
     """
-    query = 'select * from weather.forecast where woeid={0} AND u="{1}"'.format(value, units)
-    yql_conector = YQLConector()
-    data = yql_conector.request(query)
+    query_base = 'select * from weather.forecast'
+    full_query = YQLConector.make_query(query_base, **kwargs)
+    yql_connector = YQLConector()
+    data = yql_connector.request(full_query)
     return data

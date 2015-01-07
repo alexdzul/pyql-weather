@@ -128,17 +128,7 @@ def _query_continent(**kwargs):
     Realizamos la consulta a la tabla geo.continents
     """
     query_base = 'select * from geo.continents'
-    if kwargs:
-        last = len(kwargs) - 1
-        i_flag = 0
-        query_base += ' where '
-        for key, value in kwargs.items():
-            if i_flag is last:  # Si es el último entonces no ponemos el "and"
-                query_base += '{0}="{1}"'.format(key, value)
-            else:
-                query_base += '{0}="{1}" and '.format(key, value)
-                i_flag += 1
+    full_query = YQLConector.make_query(query_base, **kwargs)
     yql_connector = YQLConector()
-    print query_base
-    data = yql_connector.request(query_base)
+    data = yql_connector.request(full_query)
     return data
