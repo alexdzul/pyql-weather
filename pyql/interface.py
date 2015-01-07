@@ -51,6 +51,12 @@ class YQLConector():
 
     @staticmethod
     def make_query(query_base, **kwargs):
+        """
+        Recorre los kwargs para generar una query completa con filtros and
+        :param query_base: query base para el inicio de la concatenación
+        :param kwargs: Diccionario de elementos a integrar en la consulta
+        :return: new_query
+        """
         new_query = query_base
         if kwargs:
             last = len(kwargs) - 1
