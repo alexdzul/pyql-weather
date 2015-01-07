@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Alex Dzul'
+from pyql.errors import MultipleValueError
 from pyql.interface import YQLConector
+
+
+__all__ = ('Continent', )
+
 
 class Continent():
 
@@ -14,19 +19,50 @@ class Continent():
 
     @staticmethod
     def get(**kwargs):
-        response = query_continent(**kwargs)
-        if response:
+        response = _query_continent(**kwargs)
+        my_count = response["query"]["count"]
+        if my_count > 0:
+            if response:
+                my_response = response["query"]["results"]["place"]
+                continent = Continent()
+                continent.__count = my_count
+                if type(my_response) is dict:  # Si es solo un elemento entonces enviamos de manera directa
+                    continent.__place_type_name._Result = my_response["placeTypeName"]
+                    continent.__Result = my_response
+                    return continent
+                if type(my_response) is list:
+                    msg = 'get function returns more than 1 value, please use "filter"'
+                    raise MultipleValueError(msg)
+        else:
+            return None
+
+    @staticmethod
+    def filter(**kwargs):
+        """
+        Realiza una consulta a la base de datos de Yahoo utilizando YQL.
+        El valor retornado siempre será una lista de objetos tipo "Continent"
+        """
+        response = _query_continent(**kwargs)
+        my_count = response["query"]["count"]
+        if my_count > 0:
             my_count = response["query"]["count"]
+            list_result = []
             my_response = response["query"]["results"]["place"]
-            continent = Continent()
-            continent.__count = my_count
-            if type(my_response) is dict:  # Si es solo un elemento entonces enviamos de manera directa
-                continent.__place_type_name._Result = my_response["placeTypeName"]
-                continent.__Result = my_response
             if type(my_response) is list:
-                continent.__Result = my_response[0]  # Si es una lista entonces enviamos solo el primer elemento
-                continent.__place_type_name._Result = my_response[0]["placeTypeName"]
-            return continent
+                for data in my_response:
+                    continent = Continent()
+                    continent.__Result = data
+                    continent.__count = my_count
+                    continent.__place_type_name._Result = data["placeTypeName"]
+                    list_result.append(continent)
+            if type(my_response) is dict:
+                continent = Continent()
+                continent.__Result = my_response
+                continent.__count = my_count
+                list_result.append(continent)
+            return list_result
+        else:
+            return None
 
     @property
     def place_type_name(self):
@@ -87,7 +123,7 @@ class _PlaceTypeName():
             return None
 
 
-def query_continent(**kwargs):
+def _query_continent(**kwargs):
     """
     Realizamos la consulta a la tabla geo.continents
     """
@@ -98,9 +134,11 @@ def query_continent(**kwargs):
         query_base += ' where '
         for key, value in kwargs.items():
             if i_flag is last:  # Si es el último entonces no ponemos el "and"
-                query_base += '{0}={1}'.format(key, value)
+                query_base += '{0}="{1}"'.format(key, value)
             else:
-                query_base += '{0}={1} and '.format(key, value)
+                query_base += '{0}="{1}" and '.format(key, value)
+                i_flag += 1
     yql_connector = YQLConector()
+    print query_base
     data = yql_connector.request(query_base)
     return data
