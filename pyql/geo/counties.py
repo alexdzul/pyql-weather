@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Alex Dzul'
-from pyql.geo.models import GenericGeoPlace
+from pyql.geo.generics import GenericGeoPlace
 from pyql.geo.query import query_counties
 
 

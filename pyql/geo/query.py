@@ -92,3 +92,27 @@ def query_seas(**kwargs):
     yql_connector = YQLConector()
     data = yql_connector.request(full_query)
     return data
+
+
+def query_concordance(**kwargs):
+    """
+    Realizamos la consulta a la tabla geo.concordance
+    """
+    query_base = 'select * from geo.concordance'
+    full_query = YQLConector.make_query(query_base, **kwargs)
+    print full_query
+    yql_connector = YQLConector()
+    data = yql_connector.request(full_query)
+    return data
+
+
+def query_placetypes(**kwargs):
+    """
+    Realizamos la consulta a la tabla geo.placetypes
+    """
+    query_base = 'select * from geo.placetypes'
+    full_query = YQLConector.make_query(query_base, **kwargs)
+    print full_query
+    yql_connector = YQLConector()
+    data = yql_connector.request(full_query)
+    return data

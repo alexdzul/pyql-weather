@@ -24,7 +24,7 @@ class GenericGeoPlace():
     def __init__(self):
         self._Result = None
         self._count = None
-        self._place_type_name = _PlaceTypeName()
+        self._place_type_name = PlaceTypeName()
 
     @staticmethod
     def generic_get(response):
@@ -112,7 +112,7 @@ class GenericGeoPlace():
             return None
 
 
-class _PlaceTypeName():
+class PlaceTypeName():
 
     def __init__(self):
         self._Result = None
