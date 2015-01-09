@@ -19,6 +19,11 @@ class Concordance():
         """
         return self.__Result
 
+    def count(self):
+        """
+        Retornamos el número de elementos tipo concordance
+        """
+        return self.__count
     @staticmethod
     def get(**kwargs):
         """
