@@ -41,10 +41,10 @@ class Concordance():
             if response:
                 my_response = response["query"]["results"]["concordance"]
                 if type(my_response) is dict:  # Si es solo un elemento entonces enviamos de manera directa
-                    place = Concordance()
-                    place.__count = my_count
-                    place.__Result = my_response
-                    return place
+                    concordance = Concordance()
+                    concordance.__count = my_count
+                    concordance.__Result = my_response
+                    return concordance
                 if type(my_response) is list:
                     msg = 'get function returns more than 1 value, please use "filter"'
                     raise MultipleValueError(msg)
