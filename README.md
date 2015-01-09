@@ -14,6 +14,8 @@ Esta versión número 2 tiene mayor soporte a las consultas YQL.
 + geo.counties
 + geo.countries
 + geo.seas
++ geo.placetypes
++ geo.concordance
 + geo.states
 + geo.oceans
 + geo.districs
