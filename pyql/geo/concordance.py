@@ -24,6 +24,7 @@ class Concordance():
         Retornamos el número de elementos tipo concordance
         """
         return self.__count
+
     @staticmethod
     def get(**kwargs):
         """
