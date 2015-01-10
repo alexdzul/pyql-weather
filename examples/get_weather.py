@@ -17,13 +17,13 @@ print ("=======================================\n")
 print("Weather:")
 print ("--------------------------------------")
 print("{0}º{1} {2} Code ({3})\n".format(forecast.item.condition.temp,
-                                                   forecast.units.temperature,
-                                                   forecast.item.condition.text,
-                                                   forecast.item.condition.code))
+                                         forecast.units.temperature,
+                                         forecast.item.condition.text,
+                                         forecast.item.condition.code))
 print("Astronomy:")
 print ("--------------------------------------")
 print "Sunrise: {0}\nSunset: {1}\n".format(forecast.astronomy.sunrise,
-                                            forecast.astronomy.sunset)
+                                           forecast.astronomy.sunset)
 
 print ("Forecast:")
 print ("--------------------------------------")
