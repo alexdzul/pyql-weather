@@ -25,11 +25,6 @@ class Forecast:
         self.__atmosphere = _Atmosphere()
         self.__astronomy = _Astronomy()
         self.__image = _Image()
-        self.__query = None
-
-    @property
-    def query(self):
-        return self.__query
 
     @staticmethod
     def get(**kwargs):
@@ -46,7 +41,6 @@ class Forecast:
                 my_count = response["query"]["count"]
                 channel = response["query"]["results"]["channel"]
                 forecast = Forecast()
-                forecast.__query = query
                 forecast.__count = my_count
                 forecast.__Result = channel
                 forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
