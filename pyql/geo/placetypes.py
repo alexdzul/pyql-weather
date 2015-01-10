@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Alex Dzul'
 from pyql.errors import MultipleValueError
-from pyql.geo.query import query_placetypes
+from pyql.interface import YQLConector
 from pyql.geo.generics import PlaceTypeName
 
 
 __all__ = ('PlaceType', )
+
+YQL_TABLE = "geo.placetypes"
 
 
 class PlaceType():
@@ -26,7 +28,9 @@ class PlaceType():
 
         Para obtener más de 1 resultado entonces utilizar la función filter().
         """
-        response = query_placetypes(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:
@@ -50,7 +54,9 @@ class PlaceType():
         Realiza una consulta a la base de datos de Yahoo utilizando YQL.
         El valor retornado siempre será una lista de objetos tipo "Placetypes"
         """
-        response = query_placetypes(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:

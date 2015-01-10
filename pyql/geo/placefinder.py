@@ -4,6 +4,11 @@ from pyql.errors import MultipleValueError
 from pyql.interface import YQLConector
 
 
+__all__ = ('PlaceFinder', )
+
+YQL_TABLE = "geo.placefinder"
+
+
 class PlaceFinder():
     """
     Consulta la información del elemento geo.placefinder de Yahoo YQL
@@ -29,7 +34,9 @@ class PlaceFinder():
 
         Para obtener más de 1 resultado entonces utilizar la función filter().
         """
-        response = query_placefinder(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:
@@ -52,7 +59,9 @@ class PlaceFinder():
         Realiza una consulta a la base de datos de Yahoo utilizando YQL.
         El valor retornado siempre será una lista de objetos tipo "PlaceFinder"
         """
-        response = query_placefinder(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:
@@ -289,13 +298,3 @@ class PlaceFinder():
             return self.__Result["woetype"]
         except KeyError:
             return None
-
-
-def query_placefinder(**kwargs):
-    # query_base = 'select * from geo.placefinder where {0}="{1}" and gflags="R"'.format(field, value)
-    query_base = 'select * from geo.placefinder'
-    full_query = YQLConector.make_query(query_base, **kwargs)
-    full_query += ' and gflags="R"'  # Se agrega esta entrada especial
-    yql_connector = YQLConector()
-    data = yql_connector.request(full_query)
-    return data

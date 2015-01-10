@@ -4,7 +4,7 @@ from pyql.interface import YQLConector
 
 __all__ = ('Forecast', )
 
-FORECAST_TABLE = "weather.forecast"
+YQL_TABLE = "weather.forecast"
 
 
 class Forecast:
@@ -38,7 +38,7 @@ class Forecast:
         Posteriomente se puede consultar más información del clima utilizando las funciones que contiene.
         """
         connect = YQLConector()
-        query = connect.make_query(FORECAST_TABLE, **kwargs)
+        query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count:
