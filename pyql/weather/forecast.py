@@ -2,6 +2,10 @@
 __author__ = 'Alex Dzul'
 from pyql.interface import YQLConector
 
+__all__ = ('Forecast', )
+
+FORECAST_TABLE = "weather.forecast"
+
 
 class Forecast:
     """
@@ -21,6 +25,11 @@ class Forecast:
         self.__atmosphere = _Atmosphere()
         self.__astronomy = _Astronomy()
         self.__image = _Image()
+        self.__query = None
+
+    @property
+    def query(self):
+        return self.__query
 
     @staticmethod
     def get(**kwargs):
@@ -28,13 +37,16 @@ class Forecast:
         Constructor del objeto Weather, se alimenta inicialmente de un WOEID para obtener información del clima.
         Posteriomente se puede consultar más información del clima utilizando las funciones que contiene.
         """
-        response = query_forecast(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(FORECAST_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count:
             if response:
                 my_count = response["query"]["count"]
                 channel = response["query"]["results"]["channel"]
                 forecast = Forecast()
+                forecast.__query = query
                 forecast.__count = my_count
                 forecast.__Result = channel
                 forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
@@ -69,7 +81,6 @@ class Forecast:
             return self.__Result["title"]
         except KeyError:
             return None
-
 
     @property
     def link(self):
@@ -114,7 +125,6 @@ class Forecast:
     def units(self):
         return self.__units
 
-
     @property
     def wind(self):
         return self.__wind
@@ -134,7 +144,6 @@ class Forecast:
     @property
     def item(self):
         return self.__item
-
 
 
 class _Units():
@@ -479,14 +488,3 @@ class _Condition():
             return self._Result["temp"]
         except KeyError:
             return None
-
-
-def query_forecast(**kwargs):
-    """
-    Construye la query YQL y realiza la solicitud de datos a la tabla weather.forecast
-    """
-    query_base = 'select * from weather.forecast'
-    full_query = YQLConector.make_query(query_base, **kwargs)
-    yql_connector = YQLConector()
-    data = yql_connector.request(full_query)
-    return data
