@@ -10,6 +10,7 @@ import urllib2
 from pyql.settings import YAHOO_URL
 from pyql.errors import YQLRequestError
 
+
 class YQLConector():
 
     def __init__(self):
@@ -19,20 +20,17 @@ class YQLConector():
     def request(self, my_query, format_response="json"):
         """
         Realiza una consulta YQL a los servidores de Yahoo
-        :param my_query:
-        :return:
         """
         obj = None
         url = self.yql_to_url(my_query, format_response)
         try:
-            format_response = "json"
             if format_response == "json":
                 obj = json.load(urllib2.urlopen(url))
             if format_response == "xml":
                 obj = urllib2.urlopen(url).read()
             return obj
         except:
-            error = "No pudismo conectarnos a los servidores de Yahoo"
+            error = "No pudismo conectarnos a los servidores de Yahoo o la consulta realizada es incorrecta"
             raise YQLRequestError(error)
 
     def yql_to_url(self, query, format_response="json"):

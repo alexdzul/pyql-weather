@@ -36,7 +36,7 @@ class Forecast:
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
         my_count = response["query"]["count"]
-        if my_count:
+        if my_count > 0:
             if response:
                 my_count = response["query"]["count"]
                 channel = response["query"]["results"]["channel"]
@@ -73,19 +73,15 @@ class Forecast:
                     pass
                 try:
                     condition = _Condition()  # Creamos un elemento del tipo Condition
-                except KeyError:
-                    pass
-                try:
                     condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
+                    forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
                 except KeyError:
                     pass
-                try:
-                    forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
-                except:
+                except StandardError:
                     pass
                 return forecast
         else:
-            return None
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     def count(self):
         """

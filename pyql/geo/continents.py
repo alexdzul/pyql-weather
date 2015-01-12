@@ -32,4 +32,4 @@ class Continent(GenericGeoPlace):
         connect = YQLConector()
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
-        return Continent.generic_filter(response)
+        return Continent.generic_get(response)

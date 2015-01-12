@@ -1,27 +1,30 @@
-pyql-weather v.0.2.0
+pyql-weather
 =================
-### Yahoo Weather para Python
-
-
-Esta versión número 2 tiene mayor soporte a las consultas YQL.
+### Python Wrapper for YQL an Yahoo Weather.
 
 ### Acceso a tablas
 
-> Se tiene disponible el acceso a las tablas:
+> Se tiene disponible el acceso a las siguientes tablas:
 
-+ geo.placefinder
+
 + geo.continents
 + geo.counties
 + geo.countries
 + geo.seas
 + geo.placetypes
++ geo.placefinder
++ geo.places
 + geo.concordance
 + geo.states
 + geo.oceans
 + geo.districs
 + weather.forecast
 
-
 ### Nota:
 
-Esta versión se encuentra en desarrollo, sin embargo ya es más estable.
+Adicional a estas tablas, existe un objeto llamado:
+
++ YQLConnector
+
+
+El cual nos permite ejecutar consultas YQL personalizadas a Yahoo.
