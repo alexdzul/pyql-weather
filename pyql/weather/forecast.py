@@ -73,15 +73,11 @@ class Forecast:
                     pass
                 try:
                     condition = _Condition()  # Creamos un elemento del tipo Condition
-                except KeyError:
-                    pass
-                try:
                     condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
+                    forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
                 except KeyError:
                     pass
-                try:
-                    forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
-                except:
+                except StandardError:
                     pass
                 return forecast
         else:
