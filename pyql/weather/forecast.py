@@ -36,7 +36,7 @@ class Forecast:
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
         my_count = response["query"]["count"]
-        if my_count:
+        if my_count > 0:
             if response:
                 my_count = response["query"]["count"]
                 channel = response["query"]["results"]["channel"]
@@ -85,7 +85,7 @@ class Forecast:
                     pass
                 return forecast
         else:
-            return None
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     def count(self):
         """

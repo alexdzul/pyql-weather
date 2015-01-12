@@ -51,7 +51,7 @@ class PlaceFinder():
                     msg = 'get function returns more than 1 value, please use "filter"'
                     raise MultipleValueError(msg)
         else:
-            return None
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     @staticmethod
     def filter(**kwargs):
@@ -81,7 +81,7 @@ class PlaceFinder():
                     list_result.append(place)
                 return list_result
         else:
-            return None
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     def count(self):
         """
