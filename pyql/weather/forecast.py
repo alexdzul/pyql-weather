@@ -2,6 +2,10 @@
 __author__ = 'Alex Dzul'
 from pyql.interface import YQLConector
 
+__all__ = ('Forecast', )
+
+YQL_TABLE = "weather.forecast"
+
 
 class Forecast:
     """
@@ -28,7 +32,9 @@ class Forecast:
         Constructor del objeto Weather, se alimenta inicialmente de un WOEID para obtener información del clima.
         Posteriomente se puede consultar más información del clima utilizando las funciones que contiene.
         """
-        response = query_forecast(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count:
             if response:
@@ -37,16 +43,46 @@ class Forecast:
                 forecast = Forecast()
                 forecast.__count = my_count
                 forecast.__Result = channel
-                forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
-                forecast.__location._Result = channel["location"]  # Llenamos el objeto tipo location
-                forecast.__units._Result = channel["units"]  # Llenamos el objeto tipo location
-                forecast.__wind._Result = channel["wind"]  # Llenamos el objeto tipo location
-                forecast.__atmosphere._Result = channel["atmosphere"]  # Llenamos el objeto tipo atmosphere
-                forecast.__astronomy._Result = channel["astronomy"]  # Llenamos el objeto tipo astronomy
-                forecast.__image._Result = channel["image"]  # Llenamos el objeto tipo image
-                condition = _Condition()  # Creamos un elemento del tipo Condition
-                condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
-                forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
+                try:
+                    forecast.__item._Result = channel["item"]  # LLenamos el objeto tipo item
+                except KeyError:
+                    pass
+                try:
+                    forecast.__location._Result = channel["location"]  # Llenamos el objeto tipo location
+                except KeyError:
+                    pass
+                try:
+                    forecast.__units._Result = channel["units"]  # Llenamos el objeto tipo location
+                except KeyError:
+                    pass
+                try:
+                    forecast.__wind._Result = channel["wind"]  # Llenamos el objeto tipo location
+                except:
+                    pass
+                try:
+                    forecast.__atmosphere._Result = channel["atmosphere"]  # Llenamos el objeto tipo atmosphere
+                except KeyError:
+                    pass
+                try:
+                    forecast.__astronomy._Result = channel["astronomy"]  # Llenamos el objeto tipo astronomy
+                except KeyError:
+                    pass
+                try:
+                    forecast.__image._Result = channel["image"]  # Llenamos el objeto tipo image
+                except KeyError:
+                    pass
+                try:
+                    condition = _Condition()  # Creamos un elemento del tipo Condition
+                except KeyError:
+                    pass
+                try:
+                    condition._Result = channel["item"]["condition"]  # Inicializamos el valor de __Result
+                except KeyError:
+                    pass
+                try:
+                    forecast.__item._condition = condition  # Asignamos el objeto al objeto principal forecast
+                except:
+                    pass
                 return forecast
         else:
             return None
@@ -69,13 +105,16 @@ class Forecast:
             return self.__Result["title"]
         except KeyError:
             return None
-
+        except TypeError:
+            return None
 
     @property
     def link(self):
         try:
             return self.__Result["link"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -84,12 +123,16 @@ class Forecast:
             return self.__Result["description"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def language(self):
         try:
             return self.__Result["languaje"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -98,12 +141,16 @@ class Forecast:
             return self.__Result["lastBuildDate"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def ttl(self):
         try:
             return self.__Result["ttl"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -113,7 +160,6 @@ class Forecast:
     @property
     def units(self):
         return self.__units
-
 
     @property
     def wind(self):
@@ -136,7 +182,6 @@ class Forecast:
         return self.__item
 
 
-
 class _Units():
 
     def __init__(self):
@@ -154,12 +199,16 @@ class _Units():
             return self._Result["distance"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def pressure(self):
         try:
             return self._Result["pressure"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -168,12 +217,16 @@ class _Units():
             return self._Result["speed"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def temperature(self):
         try:
             return self._Result["temperature"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
 
@@ -194,6 +247,8 @@ class _Wind():
             return self._Result["chill"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def direction(self):
@@ -201,12 +256,16 @@ class _Wind():
             return self._Result["direction"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def speed(self):
         try:
             return self._Result["speed"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
 
@@ -267,12 +326,16 @@ class _Astronomy():
             return self._Result["sunrise"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def sunset(self):
         try:
             return self._Result["sunset"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
 
@@ -293,12 +356,16 @@ class _Image():
             return self._Result["title"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def width(self):
         try:
             return self._Result["width"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -307,6 +374,8 @@ class _Image():
             return self._Result["height"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def link(self):
@@ -314,12 +383,16 @@ class _Image():
             return self._Result["link"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def url(self):
         try:
             return self._Result["url"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
 
@@ -340,6 +413,8 @@ class _Location():
             return self._Result["city"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def region(self):
@@ -347,12 +422,16 @@ class _Location():
             return self._Result["region"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def country(self):
         try:
             return self._Result["country"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
 
@@ -373,12 +452,16 @@ class _Item():
             return self._Result["title"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def lat(self):
         try:
             return self._Result["lat"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -387,12 +470,16 @@ class _Item():
             return self._Result["long"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def link(self):
         try:
             return self._Result["link"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -401,12 +488,16 @@ class _Item():
             return self._Result["pubdate"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def description(self):
         try:
             return self._Result["description"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -438,6 +529,8 @@ class _Item():
             return self._Result["forecast"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
 
 class _Condition():
@@ -457,6 +550,8 @@ class _Condition():
             return self._Result["date"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def text(self):
@@ -471,6 +566,8 @@ class _Condition():
             return self._Result["code"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
 
     @property
@@ -479,14 +576,5 @@ class _Condition():
             return self._Result["temp"]
         except KeyError:
             return None
-
-
-def query_forecast(**kwargs):
-    """
-    Construye la query YQL y realiza la solicitud de datos a la tabla weather.forecast
-    """
-    query_base = 'select * from weather.forecast'
-    full_query = YQLConector.make_query(query_base, **kwargs)
-    yql_connector = YQLConector()
-    data = yql_connector.request(full_query)
-    return data
+        except TypeError:
+            return None

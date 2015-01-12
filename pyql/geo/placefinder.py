@@ -4,6 +4,11 @@ from pyql.errors import MultipleValueError
 from pyql.interface import YQLConector
 
 
+__all__ = ('PlaceFinder', )
+
+YQL_TABLE = "geo.placefinder"
+
+
 class PlaceFinder():
     """
     Consulta la información del elemento geo.placefinder de Yahoo YQL
@@ -29,7 +34,9 @@ class PlaceFinder():
 
         Para obtener más de 1 resultado entonces utilizar la función filter().
         """
-        response = query_placefinder(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:
@@ -52,7 +59,9 @@ class PlaceFinder():
         Realiza una consulta a la base de datos de Yahoo utilizando YQL.
         El valor retornado siempre será una lista de objetos tipo "PlaceFinder"
         """
-        response = query_placefinder(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:
@@ -89,12 +98,16 @@ class PlaceFinder():
             return self.__Result["quality"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def addressmatchtype(self):
         try:
             return self.__Result["addressMatchType"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -103,12 +116,16 @@ class PlaceFinder():
             return self.__Result["latitude"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def longitude(self):
         try:
             return self.__Result["longitude"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -117,12 +134,16 @@ class PlaceFinder():
             return self.__Result["offsetlat"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def offsetlon(self):
         try:
             return self.__Result["offsetlat"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -131,12 +152,16 @@ class PlaceFinder():
             return self.__Result["radius"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def name(self):
         try:
             return self.__Result["name"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -145,12 +170,16 @@ class PlaceFinder():
             return self.__Result["line1"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def line2(self):
         try:
             return self.__Result["line2"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -159,12 +188,16 @@ class PlaceFinder():
             return self.__Result["line3"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def line4(self):
         try:
             return self.__Result["line4"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -173,6 +206,8 @@ class PlaceFinder():
             return self.__Result["house"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def street(self):
@@ -180,12 +215,16 @@ class PlaceFinder():
             return self.__Result["street"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def xstreet(self):
         try:
             return self.__Result["xstreet"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -198,12 +237,16 @@ class PlaceFinder():
             return self.__Result["unit"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def postal(self):
         try:
             return self.__Result["postal"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -212,12 +255,16 @@ class PlaceFinder():
             return self.__Result["neighborhood"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def city(self):
         try:
             return self.__Result["city"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -226,12 +273,16 @@ class PlaceFinder():
             return self.__Result["county"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def state(self):
         try:
             return self.__Result["state"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -247,12 +298,16 @@ class PlaceFinder():
             return self.__Result["countrycode"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def statecode(self):
         try:
             return self.__Result["statecode"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -261,12 +316,16 @@ class PlaceFinder():
             return self.__Result["countycode"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def uzip(self):
         try:
             return self.__Result["uzip"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -275,12 +334,16 @@ class PlaceFinder():
             return self.__Result["hash"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def woeid(self):
         try:
             return self.__Result["woeid"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -289,13 +352,5 @@ class PlaceFinder():
             return self.__Result["woetype"]
         except KeyError:
             return None
-
-
-def query_placefinder(**kwargs):
-    # query_base = 'select * from geo.placefinder where {0}="{1}" and gflags="R"'.format(field, value)
-    query_base = 'select * from geo.placefinder'
-    full_query = YQLConector.make_query(query_base, **kwargs)
-    full_query += ' and gflags="R"'  # Se agrega esta entrada especial
-    yql_connector = YQLConector()
-    data = yql_connector.request(full_query)
-    return data
+        except TypeError:
+            return None

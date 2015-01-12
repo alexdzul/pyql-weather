@@ -13,7 +13,8 @@ from pyql.errors import YQLRequestError
 class YQLConector():
 
     def __init__(self):
-        self.url = None
+        self.__url = None
+        self.__query = None
 
     def request(self, my_query, format_response="json"):
         """
@@ -22,20 +23,19 @@ class YQLConector():
         :return:
         """
         obj = None
-        self.url = self.yql_to_url(my_query, format_response)
+        url = self.yql_to_url(my_query, format_response)
         try:
             format_response = "json"
             if format_response == "json":
-                obj = json.load(urllib2.urlopen(self.url))
+                obj = json.load(urllib2.urlopen(url))
             if format_response == "xml":
-                obj = urllib2.urlopen(self.url).read()
+                obj = urllib2.urlopen(url).read()
             return obj
         except:
             error = "No pudismo conectarnos a los servidores de Yahoo"
             raise YQLRequestError(error)
 
-    @staticmethod
-    def yql_to_url(query, format_response="json"):
+    def yql_to_url(self, query, format_response="json"):
         """
         Función que se utiliza para pasar el query YQL a un link HTML para que pueda reenviarse y conectarse a los servicios
         de Yahoo.
@@ -47,17 +47,17 @@ class YQLConector():
         query = query.replace("\"", "%22")  # Cambiamos las comillas
         query = query.replace(",", "%2C")
         url = "{0}{1}&format={2}&callback=".format(YAHOO_URL, query, format_response)
+        self.__url = url
         return url
 
-    @staticmethod
-    def make_query(query_base, **kwargs):
+    def make_query(self, yql_table, **kwargs):
         """
         Recorre los kwargs para generar una query completa con filtros and
         :param query_base: query base para el inicio de la concatenación
         :param kwargs: Diccionario de elementos a integrar en la consulta
         :return: new_query
         """
-        new_query = query_base
+        new_query = "Select * from {0}".format(yql_table)
         if kwargs:
             last = len(kwargs) - 1
             i_flag = 0
@@ -68,4 +68,5 @@ class YQLConector():
                 else:
                     new_query += '{0}="{1}" and '.format(key, value)
                     i_flag += 1
+        self.__query = new_query
         return new_query

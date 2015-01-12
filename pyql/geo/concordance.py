@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Alex Dzul'
 from pyql.errors import MultipleValueError
-from pyql.geo.query import query_concordance
+from pyql.interface import YQLConector
 
 
 __all__ = ('Concordance', )
+
+YQL_TABLE = "geo.concordance"
 
 
 class Concordance():
@@ -12,18 +14,20 @@ class Concordance():
     def __init__(self):
         self.__Result = None
         self.__count = None
+        self.__query = None
+
+    @property
+    def query(self):
+        """
+        Retorna información de la query realizada a Yahoo.
+        """
+        return self.__query
 
     def as_json(self):
         """
         Devolvemos los resultados en formato JSON
         """
         return self.__Result
-
-    def count(self):
-        """
-        Retornamos el número de elementos tipo concordance
-        """
-        return self.__count
 
     @staticmethod
     def get(**kwargs):
@@ -35,7 +39,9 @@ class Concordance():
 
         Para obtener más de 1 resultado entonces utilizar la función filter().
         """
-        response = query_concordance(**kwargs)
+        connect = YQLConector()
+        query = connect.make_query(YQL_TABLE, **kwargs)
+        response = connect.request(query)
         my_count = response["query"]["count"]
         if my_count > 0:
             if response:
@@ -66,12 +72,16 @@ class Concordance():
             return self.__Result["lang"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def xmlns(self):
         try:
             return self.__Result["xmlns"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -80,12 +90,16 @@ class Concordance():
             return self.__Result["yahoo"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def uri(self):
         try:
             return self.__Result["uri"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -94,12 +108,16 @@ class Concordance():
             return self.__Result["woeid"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def iata(self):
         try:
             return self.__Result["iata"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -108,12 +126,16 @@ class Concordance():
             return self.__Result["icao"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def faa(self):
         try:
             return self.__Result["faa"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -122,10 +144,14 @@ class Concordance():
             return self.__Result["geonames"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def osm(self):
         try:
             return self.__Result["osm"]
         except KeyError:
+            return None
+        except TypeError:
             return None
