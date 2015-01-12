@@ -20,8 +20,6 @@ class YQLConector():
     def request(self, my_query, format_response="json"):
         """
         Realiza una consulta YQL a los servidores de Yahoo
-        :param my_query:
-        :return:
         """
         obj = None
         url = self.yql_to_url(my_query, format_response)
