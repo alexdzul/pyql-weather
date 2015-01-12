@@ -32,4 +32,4 @@ class Countie(GenericGeoPlace):
         connect = YQLConector()
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
-        return Countie.generic_filter(response)
+        return Countie.generic_get(response)

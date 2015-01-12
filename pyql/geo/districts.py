@@ -21,7 +21,10 @@ class District(GenericGeoPlace):
         connect = YQLConector()
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
-        return District.generic_get(response)
+        if response["query"]["count"] > 0:
+            return District.generic_get(response)
+        else:
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     @staticmethod
     def filter(**kwargs):
@@ -32,4 +35,4 @@ class District(GenericGeoPlace):
         connect = YQLConector()
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
-        return District.generic_filter(response)
+        return District.generic_get(response)

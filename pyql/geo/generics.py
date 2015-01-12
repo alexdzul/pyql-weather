@@ -42,7 +42,7 @@ class GenericGeoPlace():
                     msg = 'get function returns more than 1 value, please use "filter"'
                     raise MultipleValueError(msg)
         else:
-            return None
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     @staticmethod
     def generic_filter(response):
