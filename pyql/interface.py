@@ -32,7 +32,7 @@ class YQLConector():
                 obj = urllib2.urlopen(url).read()
             return obj
         except:
-            error = "No pudismo conectarnos a los servidores de Yahoo"
+            error = "No pudismo conectarnos a los servidores de Yahoo o la consulta realizada es incorrecta"
             raise YQLRequestError(error)
 
     def yql_to_url(self, query, format_response="json"):
