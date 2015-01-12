@@ -97,12 +97,16 @@ class PlaceType():
             return self._Result["lang"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def uri(self):
         try:
             return self._Result["uri"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -114,4 +118,6 @@ class PlaceType():
         try:
             return self._Result["placeTypeDescription"]
         except KeyError:
+            return None
+        except TypeError:
             return None

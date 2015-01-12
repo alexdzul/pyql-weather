@@ -89,12 +89,16 @@ class GenericGeoPlace():
             return self._Result["lang"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def uri(self):
         try:
             return self._Result["uri"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -103,12 +107,16 @@ class GenericGeoPlace():
             return self._Result["woeid"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def name(self):
         try:
             return self._Result["name"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
 
@@ -129,10 +137,14 @@ class PlaceTypeName():
             return self._Result["code"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def content(self):
         try:
             return self._Result["content"]
         except KeyError:
+            return None
+        except TypeError:
             return None

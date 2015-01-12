@@ -98,12 +98,16 @@ class PlaceFinder():
             return self.__Result["quality"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def addressmatchtype(self):
         try:
             return self.__Result["addressMatchType"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -112,12 +116,16 @@ class PlaceFinder():
             return self.__Result["latitude"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def longitude(self):
         try:
             return self.__Result["longitude"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -126,12 +134,16 @@ class PlaceFinder():
             return self.__Result["offsetlat"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def offsetlon(self):
         try:
             return self.__Result["offsetlat"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -140,12 +152,16 @@ class PlaceFinder():
             return self.__Result["radius"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def name(self):
         try:
             return self.__Result["name"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -154,12 +170,16 @@ class PlaceFinder():
             return self.__Result["line1"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def line2(self):
         try:
             return self.__Result["line2"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -168,12 +188,16 @@ class PlaceFinder():
             return self.__Result["line3"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def line4(self):
         try:
             return self.__Result["line4"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -182,6 +206,8 @@ class PlaceFinder():
             return self.__Result["house"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def street(self):
@@ -189,12 +215,16 @@ class PlaceFinder():
             return self.__Result["street"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def xstreet(self):
         try:
             return self.__Result["xstreet"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -207,12 +237,16 @@ class PlaceFinder():
             return self.__Result["unit"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def postal(self):
         try:
             return self.__Result["postal"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -221,12 +255,16 @@ class PlaceFinder():
             return self.__Result["neighborhood"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def city(self):
         try:
             return self.__Result["city"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -235,12 +273,16 @@ class PlaceFinder():
             return self.__Result["county"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def state(self):
         try:
             return self.__Result["state"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -256,12 +298,16 @@ class PlaceFinder():
             return self.__Result["countrycode"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def statecode(self):
         try:
             return self.__Result["statecode"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -270,12 +316,16 @@ class PlaceFinder():
             return self.__Result["countycode"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def uzip(self):
         try:
             return self.__Result["uzip"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -284,6 +334,8 @@ class PlaceFinder():
             return self.__Result["hash"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def woeid(self):
@@ -291,10 +343,14 @@ class PlaceFinder():
             return self.__Result["woeid"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def woetype(self):
         try:
             return self.__Result["woetype"]
         except KeyError:
+            return None
+        except TypeError:
             return None

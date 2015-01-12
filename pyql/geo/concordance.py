@@ -8,6 +8,7 @@ __all__ = ('Concordance', )
 
 YQL_TABLE = "geo.concordance"
 
+
 class Concordance():
 
     def __init__(self):
@@ -71,12 +72,16 @@ class Concordance():
             return self.__Result["lang"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def xmlns(self):
         try:
             return self.__Result["xmlns"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -85,12 +90,16 @@ class Concordance():
             return self.__Result["yahoo"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def uri(self):
         try:
             return self.__Result["uri"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -99,12 +108,16 @@ class Concordance():
             return self.__Result["woeid"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def iata(self):
         try:
             return self.__Result["iata"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -113,12 +126,16 @@ class Concordance():
             return self.__Result["icao"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def faa(self):
         try:
             return self.__Result["faa"]
         except KeyError:
+            return None
+        except TypeError:
             return None
 
     @property
@@ -127,10 +144,14 @@ class Concordance():
             return self.__Result["geonames"]
         except KeyError:
             return None
+        except TypeError:
+            return None
 
     @property
     def osm(self):
         try:
             return self.__Result["osm"]
         except KeyError:
+            return None
+        except TypeError:
             return None
