@@ -65,7 +65,7 @@ class GenericGeoPlace():
                 list_result.append(generic)
             return list_result
         else:
-            return None
+            raise Exception("No se encontraron resultados con los criterios especificados")
 
     def as_json(self):
         return self._Result
