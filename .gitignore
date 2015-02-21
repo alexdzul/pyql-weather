@@ -37,4 +37,6 @@ nosetests.xml
 
 #Pycharm files
 .idea/
-.idea
+
+# Doc Sphinx
+_build/
