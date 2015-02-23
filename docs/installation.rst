@@ -9,7 +9,7 @@ pyql-weather está escrita 100% en Python puro y por tal motivo no se requiere d
 
 Instalarlo es muy fácil:
 
-    $ pip install sorl-thumbnail
+    $ pip install pyql-weather
 
 O también puedes descargarlo directamente desde github en este link:
 
