@@ -71,3 +71,44 @@ Podemos de igual manera pasar una parte del nombre del lugar y obtener el mismo 
     print(find.name)
     print(find.line1)
     print(find.line2)
+
+
+Oceans
+######
+
+Para poder completar estos ejemplos es necesario importar el objeto tipo `Ocean`::
+
+    from pyql.geo.oceans import Ocean
+
+
+Obtener el listado completo de océanos
+**************************************
+
+Obtener todos los océanos e imprimir sus números `woeid`::
+
+    oceans = Ocean.filter()
+    for ocean in oceans:
+        info = "{0}, woeid: {1}".format(ocean.name, ocean.woeid)
+        print(info)
+
+El resultado sería el siguiente::
+
+    Atlantic Ocean, woeid: 55959709
+    Southern Ocean, woeid: 55959676
+    Indian Ocean, woeid: 55959675
+    Pacific Ocean, woeid: 55959717
+    Arctic Ocean, woeid: 55959707
+
+
+Obtener la información de un océano en específico:
+**************************************************
+
+Para obtener solamente un objeto del tipo `Ocean` se requiere utilizar la función `get` seguida de los criterios
+de búsqueda::
+
+    ocean = Ocean.get(name="Atlantic Ocean")
+
+    print(ocean.name)
+    print(ocean.woeid)
+    print(ocean.lang)
+
