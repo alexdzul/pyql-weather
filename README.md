@@ -1,8 +1,7 @@
 pyql-weather
 ============
 
-Python Wrapper for YQL an Yahoo Weather.
-----------------------------------------
+Wrapper escrito en Python para realizar consultar YQL y obtener información de los servidores de Yahoo.
 
 Instalación.
 -------------
