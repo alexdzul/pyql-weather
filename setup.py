@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from distutils.core import setup
 
-version = "0.1"
+version = "0.2"
 author = "Alex Dzul"
 author_email = "alexexc2@gmail.com"
 mainteiner = "Alex Dzul"
@@ -17,7 +17,7 @@ setup(name='pyql-weather',
       author_email=author_email,
       url='http://www.github.com/alexdzul/pyql-weather/',
       packages=['pyql', 'pyql.weather', 'pyql.geo'],
-      classifiers=["Development Status :: 2 - Pre-Alpha",
+      classifiers=["Development Status :: 4 - Beta",
                    "Environment :: Console",
                    "Intended Audience :: Developers",
                    "License :: OSI Approved :: MIT License",
