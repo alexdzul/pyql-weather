@@ -7,3 +7,4 @@ Contenido:
    :maxdepth: 2
 
    installation
+   examples
