@@ -57,7 +57,7 @@ class Forecast:
                     pass
                 try:
                     forecast.__wind._Result = channel["wind"]  # Llenamos el objeto tipo location
-                except:
+                except KeyError:
                     pass
                 try:
                     forecast.__atmosphere._Result = channel["atmosphere"]  # Llenamos el objeto tipo atmosphere
@@ -442,6 +442,7 @@ class _Item():
         Devuelve la información en Json
         """
         return self._Result
+
     @property
     def title(self):
         try:
@@ -564,7 +565,6 @@ class _Condition():
             return None
         except TypeError:
             return None
-
 
     @property
     def temp(self):

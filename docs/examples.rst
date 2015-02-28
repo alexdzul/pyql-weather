@@ -6,18 +6,17 @@ Ejemplos y casos de uso
 Aquí presentaremos algunos escenarios en el que se puede utilizar la herramienta.
 
 
-Continentes
-###########
+Continents
+##########
 
+Para poder completar estos ejemplos es necesario importar el objeto tipo `Continent`::
+
+    from pyql.geo.continents import Continent
 
 Enlistar todos los Continentes
 ******************************
 
-1. Lo primero que necesitamos será importar el objeto `Continent` de la siguiente manera::
-
-    from pyql.geo.continents import Continent
-
-2. Instanciamos un objeto del tipo Continent utilizando la función filter la cual nos devolverá una lista de elementos::
+1. Instanciamos un objeto del tipo Continent utilizando la función filter la cual nos devolverá una lista de elementos::
 
     continents = Continent.filter()
 
@@ -29,26 +28,46 @@ Enlistar todos los Continentes
 Obtener un Continente en específico
 ***********************************
 
-1. Importamos de nuevo el objeto `Continent`::
+Iniciamos un nuevo objeto pero en esta ocasión utilizaremos la función `get` la cual nos devuelve solamente un objeto y no una lista::
 
-    from pyql.geo.continents import Continent
-
-2. Iniciamos un nuevo objeto pero en esta ocasión utilizaremos la función `get` la cual nos devuelve solamente un objeto y no una lista::
+    continent = Continent.get(name="Africa")
 
     print(continent.name)
     print(continent.lang)
     print(continent.woeid)
 
 
-Lista de propiedades de Continent
-*********************************
+PlaceFinder
+###########
 
-Del objeto tipo Continent podemos obtener la siguiente información:
+Para poder completar estos ejemplos es necesario importar el objeto tipo `PlaceFinder`::
 
-* lang
-* uri
-* woeid
-* placeTypeName
-    * code
-    * content
-* name
+    from pyql.geo.placefinder import PlaceFinder
+
+Obtener información de un lugar vía Latitude / Longitude
+********************************************************
+
+Realizamos la búsqueda de la siguientea manera::
+
+    latitude = "20.632784"
+    longitude = "-103.359375"
+    lat_long = "{0},{1}".format(latitude, longitude)
+
+    finder = PlaceFinder.get(text=lat_long, gflags="R")
+    place_info = "{0}, {1} ZIP: {2} | WOEID:{3}".format(finder.city,
+                                                        finder.country,
+                                                        finder.uzip,
+                                                        finder.woeid)
+    print(place_info)
+
+Obtener lugar pasando parte de su nombre
+****************************************
+
+Podemos de igual manera pasar una parte del nombre del lugar y obtener el mismo resultado::
+
+
+    find = PlaceFinder.get(text="sfo")
+    print(find.quality)
+    print(find.name)
+    print(find.line1)
+    print(find.line2)

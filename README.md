@@ -1,5 +1,6 @@
 pyql-weather
-=================
+============
+
 ### Python Wrapper for YQL an Yahoo Weather.
 
 ### Acceso a tablas
@@ -20,11 +21,17 @@ pyql-weather
 + geo.districs
 + weather.forecast
 
-### Nota:
+### Otras Características:
 
 Adicional a estas tablas, existe un objeto llamado:
 
-+ YQLConnector
-
+   + YQLConnector
 
 El cual nos permite ejecutar consultas YQL personalizadas a Yahoo.
+
+
+### Documentación
+
+Si deseas leer más sobre esta librería, te recomiendo ingresar a:
+
+http://pyql-weather.readthedocs.org
