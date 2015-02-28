@@ -12,7 +12,7 @@ La manera fácil de instalar la librería es a través de la herramienta pip::
 
 o de igual manera se puede descargar el archivo tar.gz desde:
 
-1. https://pypi.python.org/pypi/pyql-weather/0.2
+1. https://pypi.python.org/pypi/pyql-weather/0.2.1
 
 y ejecutar el siguiente comando::
 
