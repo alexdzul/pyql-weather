@@ -28,7 +28,8 @@ Enlistar todos los Continentes
 Obtener un Continente en específico
 ***********************************
 
-Iniciamos un nuevo objeto pero en esta ocasión utilizaremos la función `get` la cual nos devuelve solamente un objeto y no una lista::
+Iniciamos un nuevo objeto pero en esta ocasión utilizaremos la función `get` la cual nos devuelve solamente un objeto
+y no una lista::
 
     continent = Continent.get(name="Africa")
 
@@ -111,4 +112,69 @@ de búsqueda::
     print(ocean.name)
     print(ocean.woeid)
     print(ocean.lang)
+
+States
+######
+
+1. Para poder consultar los estados de una región, es requisito construir el objeto pasando como argumento la
+llave "place" la cual es el nombre del País que deseamos conocer.
+
+2. Para poder completar estos ejemplos es necesario importar el objeto tipo `State`::
+
+    from pyql.geo.states import State
+
+
+Obtener todos los estados de México
+***********************************
+
+Generamos la consulta con el place "Mexico" e imprimimos el resultado en un ciclo for::
+
+    states = State.filter(place="Mexico")
+    for state in states:
+        print(state.name)
+
+La salida del script anterior sería similar a lo siguiente::
+
+
+    Zacatecas
+    Aguascalientes
+    San Luis Potosi
+    Nuevo Leon
+    Durango
+    Guanajuato
+    Nayarit
+    Jalisco
+    Tamaulipas
+    Queretaro de Arteaga
+    Coahuila de Zaragoza
+    Hidalgo
+    Michoacan de Ocampo
+    Mexico
+    Colima
+    Distrito Federal
+    Sinaloa
+    Tlaxcala
+    Morelos
+    Puebla
+    Veracruz-Llave
+    Chihuahua
+    Guerrero
+    Oaxaca
+    Baja California Sur
+    Tabasco
+    Sonora
+    Chiapas
+    Campeche
+    Yucatan
+    Baja California
+    Quintana Roo
+
+Obtener información del estado de Yucatán, México
+*************************************************
+
+Para este ejemplo utilizamos la función `get` en lugar de `filter` para que el resultado sea solamente un objeto
+y no necesiten recorrerlo en un ciclo::
+
+    state = State.get(place="Mexico", name="Yucatan")
+    print(state.name, state.woeid)
 
