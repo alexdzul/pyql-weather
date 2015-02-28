@@ -10,7 +10,7 @@ licence = "MIT License"
 
 setup(name='pyql-weather',
       version=version,
-      description='Yahoo Weather in Python',
+      description='Yahoo Weather in Python v.%s' % version,
       long_description=open('README.md').read(),
       license="MIT License",
       author=author,
