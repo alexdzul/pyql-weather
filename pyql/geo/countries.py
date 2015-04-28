@@ -32,4 +32,4 @@ class Country(GenericGeoPlace):
         connect = YQLConector()
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
-        return Country.generic_get(response)
+        return Country.generic_filter(response)

@@ -35,4 +35,4 @@ class District(GenericGeoPlace):
         connect = YQLConector()
         query = connect.make_query(YQL_TABLE, **kwargs)
         response = connect.request(query)
-        return District.generic_get(response)
+        return District.generic_filter(response)
