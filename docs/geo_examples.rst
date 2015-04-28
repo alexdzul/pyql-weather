@@ -3,7 +3,10 @@ Ejemplos pyql.geo
 *****************
 
 "pyql-weather" es una gran herramienta que nos permite interactuar fácilmente con los servicios del clima de Yahoo.
-Aquí presentaremos algunos escenarios en el que se puede utilizar los objetos almacenados en pyql.geo
+Aquí presentaremos algunos escenarios en el que se puede utilizar los objetos almacenados en ``pyql.geo``.
+
+
+.. note:: Para mayor información consulte la guía oficial de las tablas "geo" en `https://developer.yahoo.com/geo/geoplanet/guide/yql-tables.html <https://developer.yahoo.com/geo/geoplanet/guide/yql-tables.html>`_
 
 
 Continents
@@ -331,4 +334,159 @@ Para realizar una búsqueda de los distritos de "Greater London" escribimos lo s
     London Borough of Bexley
     London Borough of Hillingdon
     London Borough of Havering
+
+Places
+######
+
+Este objeto retorna un **lugar** o **lugares** que concuerden con los criterios de búsqueda especificada. Para poder completar estos ejemplos es necesario importar el objeto tipo `Place`::
+
+    from pyql.geo.places import Place
+
+Filtro de lugares por nombre
+****************************
+
+En este ejemplo realizaremos la búsqueda de todos los lugares que tengan como nombre "Yucatán"::
+
+    places = Place.filter(text="Yucatan")
+
+
+    for place in places:
+        print("{0}: {1} {2}".format(place.place_type_name.content,
+                                    place.name,
+                                    place.timezone.content))
+
+**Resultado**::
+
+    State: Yucatan America/Merida
+    Town: Yucatan America/Chicago
+    Town: Yucatan America/Chicago
+    Suburb: Yucatan America/Mexico_City
+    Suburb: Yucatan America/Monterrey
+    Suburb: Yucatan America/Merida
+
+En el resultado anterior puede notar que la librería nos permite conocer el tipo de objeto que Yahoo ha encontrado: State, Town, Suburb.
+
+Countries.
+##########
+
+Este objeto retorna la información de elementos que son Países o territorios independientes.  Para poder completar estos ejemplos es necesario importar el objeto tipo ``Country``::
+
+    from pyql.geo.countries import Country
+
+Listado de Países.
+******************
+
+En este ejemplo realizaremos la búsqueda de todos los países que se encuentren en "North America"::
+
+    countries = Country.filter(place="North America")
+
+    for country in countries:
+        print("{0}: {1}".format(country.name, country.place_type_name.content))
+
+**Resultado**::
+
+    Aruba: Country
+    Antigua and Barbuda: Country
+    Anguilla: Territory
+    Barbados: Country
+    Bermuda: Territory
+    The Bahamas: Country
+    Belize: Country
+    Canada: Country
+    Cayman Islands: Territory
+    Costa Rica: Country
+    Cuba: Country
+    Dominica: Country
+    Dominican Republic: Country
+    El Salvador: Country
+    Grenada: Country
+    Greenland: Province
+    Guadeloupe: Overseas Region
+    Guatemala: Country
+    Haiti: Country
+    Honduras: Country
+    Jamaica: Country
+    Martinique: Overseas Region
+    Montserrat: Territory
+    Mexico: Country
+    Nicaragua: Country
+    Panama: Country
+    Puerto Rico: Territory
+    Saint Pierre and Miquelon: Territory
+    Saint Kitts and Nevis: Country
+    St. Lucia: Country
+    Trinidad and Tobago: Country
+    Turks and Caicos Islands: Territory
+    United States: Country
+    Saint Vincent and the Grenadines: Country
+    British Virgin Islands: Territory
+    US Virgin Islands: Territory
+    United States Minor Outlying Islands: Territory
+    Saint Barthelemy: Overseas Collectivity
+    Saint-Martin: Overseas Collectivity
+
+Counties
+########
+
+Con este objeto podemos encontrar información de la división de segundo nivel de los Países. Para poder completar estos ejemplos es necesario importar el objeto tipo ``Countie``::
+
+    from pyql.geo.counties import Countie
+
+Lista filtrada
+**************
+
+A continuación presentamos un ejemplo de filtro de los municipios del estado de "Tabasco" del país "México"::
+
+    localidades = Countie.filter(place="Tabasco")
+    for local in localidades:
+        print("{0}-{1}".format(local.woeid, local.name))
+
+**Resultado**::
+
+    12601626-Macuspana
+    12601623-Jalapa
+    12601618-Centro
+    12601625-Jonuta
+    12601617-Centla Municipality
+    12601627-Nacajuca
+    12601629-Tacotalpa
+    12601630-Teapa
+    12601624-Jalpa de Mendez
+    12601620-Cunduacan
+    12601628-Paraiso
+    12601619-Comalcalco
+    12601621-Emiliano Zapata
+    12601622-Huimanguillo
+    12601616-Cardenas
+    12601615-Balancan
+    12601631-Tenosique
+
+PlaceType
+#########
+
+Objeto que nos permite conocer todos los tipos de datos que maneja Yahoo YQL. Para poder completar estos ejemplos es necesario importar el objeto tipo ``PlaceType``::
+
+    from pyql.geo.placetypes import PlaceType
+
+Obtener todos los tipos
+***********************
+
+Podemos obtener todos los tipos disponibles si utilizamos la función "filter" sin pasar ningún parámetro::
+
+    for tipo in tipos:
+        print ("{0}: {1}".format(tipo.place_type_name.content,
+                                 tipo.place_type_description))
+
+**Resultado**::
+
+    Undefined: An undefined place
+    Town: A populated settlement such as a city, town, village
+    State: One of the primary administrative areas within a country
+    County: One of the secondary administrative areas within a country
+    Local Administrative Area: One of the tertiary administrative areas within a country
+    Postal Code: A partial or full postal code
+    Country: One of the countries or dependent territories defined by the ISO 3166-1 standard
+    Island: An island
+    Airport: An airport
+    Drainage: A water feature such as a river, canal, lake, bay, ocean
 
