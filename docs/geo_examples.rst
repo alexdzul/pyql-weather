@@ -1,6 +1,6 @@
-************************************
-**pyql.geo** Ejemplos y casos de uso
-************************************
+****************
+Ejemplo pyql.geo
+****************
 
 "pyql-weather" es una gran herramienta que nos permite interactuar fácilmente con los servicios del clima de Yahoo.
 Aquí presentaremos algunos escenarios en el que se puede utilizar los objetos almacenados en pyql.geo
