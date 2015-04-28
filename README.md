@@ -17,15 +17,15 @@ más que el lenguaje Python instalado en el equipo que será ejecutado.
 Instalación
 -----------
 
-La manera fácil de instalar la librería es a través de la herramienta pip::
+La manera fácil de instalar la librería es a través de la herramienta pip:
 
     pip install pyql-weather
 
-o de igual manera se puede descargar directamente desde el repositorio de Github::
+o de igual manera se puede descargar directamente desde el repositorio de Github:
 
-    1. https://github.com/alexdzul/pyql-weather/tree/0.2.x
+    1. https://github.com/alexdzul/pyql-weather/tree/master
 
-y ejecutar el siguiente comando::
+y ejecutar el siguiente comando:
 
     python setup.py install
 
@@ -81,7 +81,7 @@ Alex Dzul
 Licencia MIT
 ============
 
-``pyql-weather`` mantiene la licencia MIT la cual define::
+``pyql-weather`` mantiene la licencia MIT la cual define:
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
