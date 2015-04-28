@@ -210,3 +210,41 @@ Podemos observar que el resultado que ``pyql-weather`` retorna es un arreglo de 
     Temperatura Mínima: 19º C
     Temperatura Máxima: 33º C
     *****************************************************************************
+
+Elementos as_json()
+*******************
+
+La librería pyql-weather nos permite acceder a los datos de cada propiedad en formato JSON. La función a utilizar es llamada ``as_json()``. A continuación presentamos algunos ejemplo:
+
+1. Viento en JSON::
+
+    print(forecast.wind.as_json())
+
+- **Resultado**::
+
+    {u'direction': u'260', u'speed': u'14.48', u'chill': u'40'}
+
+2. Astronomía en JSON::
+
+    print(forecast.astronomy.as_json())
+
+- **Resultado**::
+
+    {u'sunset': u'7:21 pm', u'sunrise': u'6:29 am'}
+
+3. Localización en JSON::
+
+    print(forecast.location.as_json())
+
+- **Resultado**::
+
+    {u'city': u'Merida', u'region': u'YU', u'country': u'Mexico'}
+
+4. Objeto Forecast completo en JSON::
+
+    print(forecast.as_json())
+
+- Resultado::
+
+    {u'lastBuildDate': u'Tue, 28 Apr 2015 2:46 pm CDT', u'atmosphere': {u'pressure': u'982.05', u'rising': u'2', u'visibility': u'6.44', u'humidity': u'31'}, u'description': u'Yahoo! Weather for Merida, MX', u'language': u'en-us', u'title': u'Yahoo! Weather - Merida, MX', u'image': {u'url': u'http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif', u'width': u'142', u'height': u'18', u'link': u'http://weather.yahoo.com', u'title': u'Yahoo! Weather'}, u'item': {u'description': u'\n<img src="http://l.yimg.com/a/i/us/we/52/30.gif"/><br />\n<b>Current Conditions:</b><br />\nPartly Cloudy, 40 C<BR />\n<BR /><b>Forecast:</b><BR />\nTue - Partly Cloudy. High: 41 Low: 26<br />\nWed - AM Thunderstorms. High: 31 Low: 23<br />\nThu - AM Showers. High: 28 Low: 21<br />\nFri - Partly Cloudy. High: 32 Low: 19<br />\nSat - Mostly Sunny. High: 33 Low: 19<br />\n<br />\n<a href="http://us.rd.yahoo.com/dailynews/rss/weather/Merida__MX/*http://weather.yahoo.com/forecast/MXYN0117_c.html">Full Forecast at Yahoo! Weather</a><BR/><BR/>\n(provided by <a href="http://www.weather.com" >The Weather Channel</a>)<br/>\n', u'pubDate': u'Tue, 28 Apr 2015 2:46 pm CDT', u'title': u'Conditions for Merida, MX at 2:46 pm CDT', u'long': u'-89.63', u'forecast': [{u'code': u'30', u'text': u'Partly Cloudy', u'high': u'41', u'low': u'26', u'date': u'28 Apr 2015', u'day': u'Tue'}, {u'code': u'38', u'text': u'AM Thunderstorms', u'high': u'31', u'low': u'23', u'date': u'29 Apr 2015', u'day': u'Wed'}, {u'code': u'39', u'text': u'AM Showers', u'high': u'28', u'low': u'21', u'date': u'30 Apr 2015', u'day': u'Thu'}, {u'code': u'30', u'text': u'Partly Cloudy', u'high': u'32', u'low': u'19', u'date': u'1 May 2015', u'day': u'Fri'}, {u'code': u'34', u'text': u'Mostly Sunny', u'high': u'33', u'low': u'19', u'date': u'2 May 2015', u'day': u'Sat'}], u'link': u'http://us.rd.yahoo.com/dailynews/rss/weather/Merida__MX/*http://weather.yahoo.com/forecast/MXYN0117_c.html', u'lat': u'20.97', u'guid': {u'isPermaLink': u'false', u'content': u'MXYN0117_2015_05_02_7_00_CDT'}, u'condition': {u'date': u'Tue, 28 Apr 2015 2:46 pm CDT', u'text': u'Partly Cloudy', u'code': u'30', u'temp': u'40'}}, u'link': u'http://us.rd.yahoo.com/dailynews/rss/weather/Merida__MX/*http://weather.yahoo.com/forecast/MXYN0117_c.html', u'location': {u'city': u'Merida', u'region': u'YU', u'country': u'Mexico'}, u'ttl': u'60', u'units': {u'distance': u'km', u'speed': u'km/h', u'temperature': u'C', u'pressure': u'mb'}, u'astronomy': {u'sunset': u'7:21 pm', u'sunrise': u'6:29 am'}, u'wind': {u'direction': u'260', u'speed': u'14.48', u'chill': u'40'}}
+
