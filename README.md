@@ -23,7 +23,7 @@ La manera fácil de instalar la librería es a través de la herramienta pip:
 
 o de igual manera se puede descargar directamente desde el repositorio de Github:
 
-    1. https://github.com/alexdzul/pyql-weather/tree/master
+    https://github.com/alexdzul/pyql-weather/tree/master
 
 y ejecutar el siguiente comando:
 
