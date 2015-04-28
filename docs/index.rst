@@ -7,4 +7,5 @@ Contenido:
    :maxdepth: 2
 
    installation
-   examples
+   geo_examples
+   weather_examples
