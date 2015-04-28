@@ -5,10 +5,16 @@ Módulo que se utiliza para las consultas YQL a Yahoo para obtener información 
 """
 __author__ = 'Alex Dzul'
 import json
-import urllib2
+import six
+import sys
 
+
+if six.PY2:
+    from urllib2 import urlopen
+if six.PY3:
+    from urllib.request import urlopen
 from pyql.settings import YAHOO_URL
-from pyql.errors import YQLRequestError
+from pyql.errors import YQLRequestError, format_sys_errors
 
 
 class YQLConector():
@@ -25,12 +31,13 @@ class YQLConector():
         url = self.yql_to_url(my_query, format_response)
         try:
             if format_response == "json":
-                obj = json.load(urllib2.urlopen(url))
+                obj = json.load(urlopen(url))
             if format_response == "xml":
-                obj = urllib2.urlopen(url).read()
+                obj = urlopen(url).read()
             return obj
         except:
-            error = "No pudismo conectarnos a los servidores de Yahoo o la consulta realizada es incorrecta"
+            error = "No pudismo conectarnos a los servidores de Yahoo o la consulta realizada es incorrecta. "
+            error += format_sys_errors(sys, with_traceback=True)
             raise YQLRequestError(error)
 
     def yql_to_url(self, query, format_response="json"):
