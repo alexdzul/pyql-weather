@@ -1,6 +1,6 @@
-****************
-Ejemplo pyql.geo
-****************
+*****************
+Ejemplos pyql.geo
+*****************
 
 "pyql-weather" es una gran herramienta que nos permite interactuar fácilmente con los servicios del clima de Yahoo.
 Aquí presentaremos algunos escenarios en el que se puede utilizar los objetos almacenados en pyql.geo
@@ -177,4 +177,3 @@ y no necesiten recorrerlo en un ciclo::
 
     state = State.get(place="Mexico", name="Yucatan")
     print(state.name, state.woeid)
-

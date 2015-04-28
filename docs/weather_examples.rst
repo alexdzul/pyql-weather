@@ -210,4 +210,3 @@ Podemos observar que el resultado que ``pyql-weather`` retorna es un arreglo de 
     Temperatura Mínima: 19º C
     Temperatura Máxima: 33º C
     *****************************************************************************
-
