@@ -2,11 +2,12 @@
 from distutils.core import setup
 from pyql import __author__, __version__, __email__, __license__, __maintainer__
 
+long_description = open('README.md').read()
 
 setup(name='pyql-weather',
       version=__version__,
       description='YQL Queries and Yahoo Weather in Python v.%s' % __version__,
-      long_description=open('README.md').read(),
+      long_description=long_description,
       license=__license__,
       author=__author__,
       author_email=__email__,

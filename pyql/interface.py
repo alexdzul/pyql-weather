@@ -8,11 +8,9 @@ import json
 import sys
 from pyql.settings import YAHOO_URL
 from pyql.errors import YQLRequestError, format_sys_errors
+from pyql.settings import MY_PY3, MY_PY2
 
 
-# Obtenemos la versió de Python que estamos ejecutando
-MY_PY2 = sys.version_info[0] == 2
-MY_PY3 = sys.version_info[0] == 3
 # Importamos la librería que utilizaremos dependiendo de la versión Python.
 if MY_PY2:
     from urllib2 import urlopen
