@@ -14,7 +14,7 @@ for cont in continents:
 
 # Ejemplo 2. Obtenemos el listado de los estados de México.
 print("========= Listado de estados de México")
-states = State.filter(place="México")
+states = State.filter(place="Mexico")
 for state in states:
     print(state.name)
 
