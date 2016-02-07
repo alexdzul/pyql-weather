@@ -26,7 +26,7 @@ Enlistar todos los Continentes
 3. Recorremos la lista de objetos y podremos acceder a las propiedades de cada continente de la siguiente manera::
 
     for cont in continents:
-        print cont.name
+        print(cont.name)
 
 Obtener un Continente en específico
 ***********************************

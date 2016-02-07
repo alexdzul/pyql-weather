@@ -155,7 +155,7 @@ A continuación veremos un ejemplo básico para extraer el pronóstico para la c
     forecast = Forecast.get(woeid=woeid, u="c")
 
     for day in forecast.item.forecast:
-        print day
+        print(day)
 
 **Resultado**::
 
