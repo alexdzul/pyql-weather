@@ -2,7 +2,7 @@
 from distutils.core import setup
 from pyql import __author__, __version__, __email__, __license__, __maintainer__
 
-short_description = 'YQL Queries and Yahoo Weather in Python v.%s' % __version__,
+short_description = 'YQL Queries and Yahoo Weather in Python v.%s' % __version__
 
 
 try:

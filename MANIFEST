@@ -2,6 +2,8 @@
 LICENSE
 README.md
 setup.py
+demos/__init__.py
+demos/demo.py
 pyql/__init__.py
 pyql/errors.py
 pyql/interface.py
